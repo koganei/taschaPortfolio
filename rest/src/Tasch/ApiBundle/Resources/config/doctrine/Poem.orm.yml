@@ -1,0 +1,31 @@
+Tasch\ApiBundle\Entity\Poem:
+    type: entity
+    table: null
+    repositoryClass: Tasch\ApiBundle\Entity\PoemRepository
+    id:
+        id:
+            type: integer
+            id: true
+            generator:
+                strategy: AUTO
+    fields:
+        title:
+            type: string
+            length: 255
+        body:
+            type: text
+        background:
+            type: text
+        started:
+            type: datetimetz
+        updated:
+            type: datetimetz
+        featured:
+            type: boolean
+        coordinates:
+            type: string
+            length: 255
+        color:
+            type: string
+            length: 25
+    lifecycleCallbacks: {  }

@@ -1,0 +1,11 @@
+tasch_api_homepage:
+    pattern:  /hello/{name}
+    defaults: { _controller: TaschApiBundle:Default:index }
+
+dictionary_service:
+    pattern: /dictionary/{word}
+    defaults: { _controller: TaschApiBundle:Default:dictionary }
+
+wikipedia_service:
+    pattern: /wikipedia/{word}
+    defaults: { _controller: TaschApiBundle:Default:wikipedia }

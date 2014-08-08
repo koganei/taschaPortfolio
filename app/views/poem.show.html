@@ -1,0 +1,16 @@
+<h1 ng-show="!editing">
+    <span>{{poem.title}}</span>
+    <input ng-show="editing" type="text" ng-model="poem.title">
+</h1>
+
+<button ng-show="editing" ng-click="save(poem)">Save</button>
+
+<div>
+    <p ng-show="!editing" btf-markdown="poem.body"></p>
+    <textarea ng-show="editing" ng-model="poem.body" cols="150" rows="200"></textarea>
+</div>
+
+<div>
+    <button ng-show="!editing" ng-click="editing = !editing">Edit</button>
+    <button ng-show="editing" ng-click="save(poem)">Save</button>
+</div>

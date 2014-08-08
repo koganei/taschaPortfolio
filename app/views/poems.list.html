@@ -1,0 +1,4 @@
+<h1>Poem</h1>
+<ul>
+    <li ng-repeat="poem in poems" ui-sref="poem({ id: poem.id, title: (poem.title | titleForUrl) })">{{ poem.title }}</li>
+</ul>

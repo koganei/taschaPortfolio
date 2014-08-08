@@ -1,0 +1,7 @@
+tasch_api:
+    resource: "@TaschApiBundle/Resources/config/routing.yml"
+    prefix:   /
+
+poems:
+    type: rest
+    resource: Tasch\ApiBundle\Controller\PoemsController

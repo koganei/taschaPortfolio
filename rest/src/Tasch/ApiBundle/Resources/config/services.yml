@@ -1,0 +1,7 @@
+parameters:
+#    tasch_api.example.class: Tasch\ApiBundle\Example
+
+services:
+#    tasch_api.example:
+#        class: %tasch_api.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
