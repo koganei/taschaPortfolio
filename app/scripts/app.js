@@ -29,36 +29,8 @@ angular
       .state('home', {
         url: '/',
         templateUrl: 'views/home.html'
-      })
-      .state('poems', {
-        url: '/poems',
-        templateUrl: 'views/poems.list.html',
-        resolve: {
-          poems: ['poemsApi', function(poemsApi) {
-            return poemsApi.getList();
-          }]
-        },
-        controller: ['$scope', 'poems', function($scope, poems) {
-          $scope.poems = poems;
-        }]
-      })
-      .state('poem', {
-        url: '/poem/:id/*title',
-        templateUrl: 'views/poem.show.html',
-        resolve: {
-          poem: ['poemsApi', '$stateParams', function(poemsApi, $stateParams) {
-            return poemsApi.get($stateParams.id);
-          }]
-        },
-        controller: ['$scope', 'poem', function($scope, poem) {
-          $scope.poem = poem;
-
-          $scope.save = function savePoem(p) {
-            p.save();
-            $scope.editing = false;
-          };
-        }]
       });
+
   })
 
   .config(function(RestangularProvider) {
