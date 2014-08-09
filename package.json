@@ -32,7 +32,8 @@
     "karma": "~0.12.19",
     "karma-jasmine": "~0.1.5",
     "jasmine-expect": "~1.22.0",
-    "karma-coverage": "~0.2.6"
+    "karma-coverage": "~0.2.6",
+    "karma-complexity-preprocessor": "~0.1.0"
   },
   "engines": {
     "node": ">=0.10.0"

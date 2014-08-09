@@ -61,7 +61,9 @@ module.exports = function (config) {
         plugins: [
             'karma-phantomjs-launcher',
             'karma-jasmine',
-            'karma-coverage'
+            'karma-coverage',
+            'karma-complexity-preprocessor'
+
         ],
 
         // Continuous Integration mode
@@ -89,12 +91,17 @@ module.exports = function (config) {
             // do not include tests or libraries
             // (these files will be instrumented by Istanbul)
             'app/scripts/**/*.js': ['coverage']
-        }
+//            'app/scripts/**/*.js': ['coverage', 'complexity']
+        },
+
+        complexityConfig:{
+            dir:'complexity/'
+        },
 
         // optionally, configure the reporter
-//      coverageReporter: {
-//          type : 'html',
-//          dir : 'coverage/'
-//      }
+          coverageReporter: {
+              type : 'html',
+              dir : 'test/coverage/'
+          }
     });
 };
