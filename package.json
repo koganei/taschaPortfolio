@@ -33,7 +33,8 @@
     "karma-jasmine": "~0.1.5",
     "jasmine-expect": "~1.22.0",
     "karma-coverage": "~0.2.6",
-    "karma-complexity-preprocessor": "~0.1.0"
+    "karma-complexity-preprocessor": "~0.1.0",
+    "grunt-injector": "~0.5.4"
   },
   "engines": {
     "node": ">=0.10.0"

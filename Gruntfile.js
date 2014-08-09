@@ -35,7 +35,7 @@ module.exports = function (grunt) {
       },
       js: {
         files: ['<%= yeoman.app %>/scripts/{,*/}*.js'],
-        tasks: ['newer:jshint:all'],
+        tasks: ['newer:jshint:all', 'injector'],
         options: {
           livereload: '<%= connect.options.livereload %>'
         }
@@ -388,7 +388,19 @@ module.exports = function (grunt) {
         configFile: 'test/karma.conf.js',
         singleRun: true
       }
-    }
+    },
+
+      injector: {
+          options: {
+              ignorePath: 'app/',
+              addRootSlash: false
+          },
+          local: {
+              files: {
+                  'app/index.html': ['app/scripts/**/*.js']
+              }
+          }
+      }
   });
 
 
