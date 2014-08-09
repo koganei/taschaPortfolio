@@ -1,12 +1,12 @@
 'use strict';
 
-describe('Controllers', function () {
+describe('Poems: Controllers', function () {
 
     var $scope, ctrl;
 
     beforeEach(function() {
 
-        module('tascha2App');
+        module('tascha.poems');
     });
 
     describe('the poems controller', function() {
@@ -43,7 +43,11 @@ describe('Controllers', function () {
 
             var mockPoem = {
                 title: 'my Title',
-                body: 'my body of text'
+                body: 'my body of text',
+                saved: false,
+                save: function() {
+                    this.saved = true;
+                }
             };
 
             inject(function($rootScope, $controller, $q) {
@@ -58,10 +62,18 @@ describe('Controllers', function () {
 
         it('should contain a list of poems', function() {
             expect($scope.poem).toBeObject();
+
+            expect($scope.poem.title).toEqual('my Title');
+            expect($scope.poem.body).toEqual('my body of text');
         });
 
         it('should be able to save a poem', function() {
-            expect($scope.save).toBeFunction();
+            expect($scope.poem.title).toEqual('my Title');
+            expect($scope.poem.body).toEqual('my body of text');
+
+            $scope.save($scope.poem);
+
+            expect($scope.poem.saved).toBeTrue();
         });
 
     });

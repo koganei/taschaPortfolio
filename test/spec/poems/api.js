@@ -1,11 +1,8 @@
 'use strict';
 
-describe('Service: poemsApi', function () {
+describe('Poems: Api Service', function () {
 
-  var $injector = angular.injector([ 'tascha2App' ]);
-
-  // load the controller's module
-  // beforeEach(module('tascha2App'));
+  var $injector = angular.injector([ 'tascha.poems' ]);
 
   describe('when I fetch poems', function() {
 

@@ -39,7 +39,7 @@
     };
 
 
-    angular.module('tascha2App')
+    angular.module('tascha.poems', ['ui.router', 'restangular'])
         .value('poemsConfig', poemsConfig)
         .config(poemsConfig.setConfig);
 })();

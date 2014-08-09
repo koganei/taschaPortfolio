@@ -15,7 +15,7 @@
         };
     };
 
-    angular.module('tascha2App')
+    angular.module('tascha.poems')
     .controller('poemsController', poemsController)
     .controller('poemController', poemController);
 })();

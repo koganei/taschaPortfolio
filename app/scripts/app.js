@@ -2,14 +2,14 @@
 
 /**
  * @ngdoc overview
- * @name tascha2App
+ * @name tascha
  * @description
- * # tascha2App
+ * # tascha
  *
  * Main module of the application.
  */
 angular
-  .module('tascha2App', [
+  .module('tascha', [
     'ngAnimate',
     'ngCookies',
     'ngResource',
@@ -18,7 +18,9 @@ angular
     'ngTouch',
     'restangular',
     'ui.router',
-    'btford.markdown'
+    'btford.markdown',
+
+    'tascha.poems'
   ])
   .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
     $urlRouterProvider.otherwise('/');
@@ -40,15 +42,13 @@ angular
     // add a response intereceptor
     RestangularProvider.addResponseInterceptor(function(data, operation, what, url, response, deferred) {
       var extractedData;
-      // .. to look for getList operations
+
       if (operation === 'getList') {
-        // .. and handle the data and meta data
         extractedData = data[what];
-        //extractedData = data.data.data;
-        //extractedData.meta = data.data.meta;
       } else {
         extractedData = data[1];
       }
+
       return extractedData;
     });
   });

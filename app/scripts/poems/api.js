@@ -27,7 +27,7 @@ poemsApi.setConfig = function setPoemsApiConfig(RestangularProvider) {
 };
 
 
-angular.module('tascha2App')
+angular.module('tascha.poems')
 .factory('poemsApi', poemsApi)
 .config(poemsApi.setConfig);
 
