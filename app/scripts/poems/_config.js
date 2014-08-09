@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
     var poemsConfig = {
@@ -7,7 +7,7 @@
                 url: '/poems',
                 templateUrl: 'views/poems.list.html',
                 resolve: {
-                    poems: ['poemsApi', function(poemsApi) {
+                    poems: ['poemsApi', function (poemsApi) {
                         return poemsApi.getList();
                     }]
                 },
@@ -17,7 +17,7 @@
                 url: '/poem/:id/*title',
                 templateUrl: 'views/poem.show.html',
                 resolve: {
-                    poem: ['poemsApi', '$stateParams', function(poemsApi, $stateParams) {
+                    poem: ['poemsApi', '$stateParams', function (poemsApi, $stateParams) {
                         return poemsApi.get($stateParams.id);
                     }]
                 },
@@ -26,11 +26,10 @@
         }
     };
 
-    poemsConfig.attachRoutes = function(provider) {
-        for(var r in this.routes) {
-           if(this.routes.hasOwnProperty(r)) {
-               provider.state(r, this.routes[r]);
-           }
+    poemsConfig.attachRoutes = function (provider) {
+        for (var r in this.routes) {
+            provider.state(r, this.routes[r]);
+
         }
     };
 

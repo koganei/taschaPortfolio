@@ -1,4 +1,4 @@
-(function() {
+(function () {
     'use strict';
 
 
@@ -16,6 +16,6 @@
     };
 
     angular.module('tascha.poems')
-    .controller('poemsController', poemsController)
-    .controller('poemController', poemController);
+        .controller('poemsController', poemsController)
+        .controller('poemController', poemController);
 })();
