@@ -1,4 +1,4 @@
 (function () {
     'use strict';
-    angular.module('tascha.flipbook', ['ngAnimate']);
+    angular.module('tascha.flipbook', ['ngAnimate', 'ui.router']);
 })();
