@@ -21,6 +21,7 @@ module.exports = function (config) {
             'node_modules/jasmine-expect/dist/jasmine-matchers.js',
             'test/utilities/common-expects.js',
 
+            'bower_components/jquery/dist/jquery.js',
             'bower_components/angular/angular.js',
             'bower_components/angular-mocks/angular-mocks.js',
             'bower_components/angular-animate/angular-animate.js',
@@ -34,6 +35,8 @@ module.exports = function (config) {
             'bower_components/restangular/dist/restangular.js',
             'bower_components/showdown/src/showdown.js',
             'bower_components/angular-markdown-directive/markdown.js',
+            'bower_components/bookblock/js/modernizr.custom.js',
+            'bower_components/bookblock/js/jquery.bookblock.js',
             'app/scripts/**/*.js',
             'test/mock/**/*.js',
             'test/spec/**/*.js'

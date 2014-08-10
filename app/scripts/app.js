@@ -20,13 +20,12 @@ angular
         'ui.router',
         'btford.markdown',
 
-        'tascha.poems'
+        'tascha.poems',
+        'tascha.flipbook'
     ])
-    .config(function ($stateProvider, $urlRouterProvider, $locationProvider) {
+    .config(function ($stateProvider, $urlRouterProvider) {
         $urlRouterProvider.otherwise('/');
-        // $locationProvider.html5Mode(true);
-        //
-        // Now set up the states
+
         $stateProvider
             .state('home', {
                 url: '/',
@@ -39,16 +38,7 @@ angular
         RestangularProvider.setBaseUrl('http://local.com/tascha2/rest/web/app_dev.php/');
         RestangularProvider.setRequestSuffix('.json');
 
-        // add a response intereceptor
-        RestangularProvider.addResponseInterceptor(function (data, operation, what, url, response, deferred) {
-            var extractedData;
-
-            if (operation === 'getList') {
-                extractedData = data[what];
-            } else {
-                extractedData = data[1];
-            }
-
-            return extractedData;
+        RestangularProvider.addResponseInterceptor(function (data, operation, what) {
+            return (operation === 'getList') ? data[what] : data[1];
         });
     });
