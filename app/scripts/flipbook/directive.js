@@ -1,33 +1,37 @@
 (function () {
     'use strict';
-    var flipBookDirective = function flipBookDirective($rootScope, $state, $q) {
+    var flipBookDirective = function flipBookDirective($rootScope, $state, $q, $timeout) {
 
         var directiveEl,
-            bookBlockInstance,
             changeEventStarted = false,
             emptyItem,
             viewItem,
-            emptyContainer,
+            cloneContainer,
             viewContainer;
 
         function linker(scope, element, ctrl) {
             directiveEl = element;
             directiveEl.addClass('bb-bookblock');
-            bookBlockInstance = directiveEl.bookblock({
+
+            directiveEl.bookblock({
                 circular: true
             });
 
-            $rootScope.$on('$stateChangeStart', function(event, toState) {
-                refreshEmptyAndViewElements();
-                emptyContainer.empty().append(viewItem);
-                // viewContainer.empty().append(viewItem.html());
+            setStateChangesEvents();
+        }
+
+        function setStateChangesEvents() {
+            $rootScope.$on('$stateChangeStart', function (event, toState) {
+                console.log('state change start', changeEventStarted);
+                flipPageWhileStoppingEvent('next', 1, event, toState);
             });
 
 
             $rootScope.$on('$stateChangeSuccess', function (event, toState) {
-                blockingFlipPage(event, toState).then(function() {
-                    directiveEl.find('.bb-item:first-of-type').appendTo(directiveEl);
-                });
+                console.log('state change success');
+                $timeout(function() {
+                    flipPage('next', 0);
+                }, 1);
 
             });
         }
@@ -36,15 +40,18 @@
             $scope.flipPage = flipPage;
         }
 
-        function flipPage() {
+        function flipPage(dir, position) {
+            console.log('flipping page');
             var def = $q.defer();
 
-            directiveEl.bookblock('next');
+            directiveEl.bookblock(dir ? dir : 'next', position);
 
             var transition = getTransitionEndEvent();
-            if(transition) {
-                directiveEl[0].addEventListener(transition, function(){
-                    def.resolve();
+            if (transition) {
+                directiveEl[0].addEventListener(transition, function () {
+                    $timeout(function () {
+                        def.resolve();
+                    }, 1000);
                 }, false);
             } else {
                 def.resolve();
@@ -53,13 +60,17 @@
             return def.promise;
         }
 
-        function blockingFlipPage(event, toState) {
+        function flipPageWhileStoppingEvent(dir, position, event, toState) {
             if (changeEventStarted) {
-                return;
+                changeEventStarted = false;
+                var def = $q.defer();
+                def.resolve();
+                return def.promise;
             }
 
             event.preventDefault();
-            return flipPage().then(function() {
+            return flipPage(dir, position).then(function () {
+                console.log('change event has started');
                 changeEventStarted = true;
                 $state.go(toState);
             });
@@ -68,7 +79,7 @@
         function refreshEmptyAndViewElements() {
             emptyItem = directiveEl.find('.bb-item:first-of-type > *');
             viewItem = directiveEl.find('.bb-item:nth-of-type(2) > *');
-            emptyContainer = directiveEl.find('.bb-item:first-of-type');
+            cloneContainer = directiveEl.find('.bb-item:first-of-type');
             viewContainer = directiveEl.find('.bb-item:nth-of-type(2)');
         }
 
@@ -76,13 +87,13 @@
         function getTransitionEndEvent() {
             var transition;
 
-            if('ontransitionend' in window) {
+            if ('ontransitionend' in window) {
                 // Firefox
                 transition = 'transitionend';
-            } else if('onwebkittransitionend' in window) {
+            } else if ('onwebkittransitionend' in window) {
                 // Chrome/Saf (+ Mobile Saf)/Android
                 transition = 'webkitTransitionEnd';
-            } else if('onotransitionend' in directiveEl || navigator.appName === 'Opera') {
+            } else if ('onotransitionend' in directiveEl || navigator.appName === 'Opera') {
                 // Opera
                 // As of Opera 10.61, there is no "onotransitionend" property added to DOM elements,
                 // so it will always use the navigator.appName fallback
